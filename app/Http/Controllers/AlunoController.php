@@ -37,13 +37,14 @@ class AlunoController extends Controller
 
     public function editar($id) {
         $aluno = Aluno::where('id', $id)->first();
-        return view('alunos.editar', compact('aluno'));
+        $cursos = Curso::get();
+        return view('alunos.editar', compact('aluno', 'cursos'));
     }
 
     public function editarAluno(Request $request) {
         $aluno = Aluno::where('id', $request->get('id'))->first();
         $aluno->nome = $request->get('nome');
-        $aluno->curso_id = $request->get('curso_id');
+        $aluno->curso_id = $request->get('curso');
         $aluno->save();
 
         return redirect()->route('alunos.listar');

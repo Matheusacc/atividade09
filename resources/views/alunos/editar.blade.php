@@ -24,10 +24,12 @@
     </head>
     <body class="antialiased">
         <div class="container">
-            <form action="{{ route('aluno.editar_aluno') }}" method="POST">
-                @crsf
+            <form action="{{ route('alunos.editar_aluno') }}" method="POST">
+                @csrf
                 <input type="hidden" name="id" value="{{ $aluno->id }}">
+                <br>
                 <input type="text" class="form-control" name="nome" value="{{ $aluno->nome }}">
+                <br>
                 <select class="form-control" name="curso">
                     @foreach($cursos as $curso)
                         @if($curso->id == $aluno->curso_id)
@@ -37,7 +39,11 @@
                         @endif
                     @endforeach
                 </select>
+                <br>
+                <button type="submit" class="btn btn-success">Salvar</button>
             </form>
+            <br>
+            <a href="{{route('alunos.listar')}}"><button class="btn btn-danger">Voltar</button></a>
         </div>
     </body>
 </html>
